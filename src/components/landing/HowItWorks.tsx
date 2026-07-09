@@ -14,8 +14,20 @@ const steps = [
 function StickyImage({ src, index, total, progress }: { src: string; index: number; total: number; progress: MotionValue<number> }) {
   const start = index / total;
   const end = (index + 1) / total;
-  const opacity = useTransform(progress, [start - 0.05, start + 0.05, end - 0.05, end + 0.05], [0, 1, 1, 0]);
+  
+  // Limita os valores matematicamente para nunca serem menores que 0 ou maiores que 1
+  const fadeStart = Math.max(0, start - 0.05);
+  const fadeStartEnd = Math.min(1, start + 0.05);
+  const fadeEndStart = Math.max(0, end - 0.05);
+  const fadeEnd = Math.min(1, end + 0.05);
+
+  const opacity = useTransform(
+    progress, 
+    [fadeStart, fadeStartEnd, fadeEndStart, fadeEnd], 
+    [0, 1, 1, 0]
+  );
   const scale = useTransform(progress, [start, end], [1.1, 1]);
+  
   return (
     <motion.img
       src={src}
