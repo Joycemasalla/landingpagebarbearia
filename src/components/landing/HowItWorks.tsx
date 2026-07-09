@@ -44,21 +44,9 @@ export function HowItWorks() {
           {/* Sticky visual */}
           <div className="hidden lg:block">
             <div className="sticky top-24 aspect-[4/5] rounded-3xl overflow-hidden border border-white/5">
-              {steps.map((s, i) => {
-                const start = i / steps.length;
-                const end = (i + 1) / steps.length;
-                const opacity = useTransform(scrollYProgress, [start - 0.05, start + 0.05, end - 0.05, end + 0.05], [0, 1, 1, 0]);
-                const scale = useTransform(scrollYProgress, [start, end], [1.1, 1]);
-                return (
-                  <motion.img
-                    key={s.t}
-                    src={s.img}
-                    alt=""
-                    style={{ opacity, scale }}
-                    className="absolute inset-0 h-full w-full object-cover will-change-transform"
-                  />
-                );
-              })}
+              {steps.map((s, i) => (
+                <StickyImage key={s.t} src={s.img} index={i} total={steps.length} progress={scrollYProgress} />
+              ))}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
           </div>
