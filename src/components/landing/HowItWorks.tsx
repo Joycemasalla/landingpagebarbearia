@@ -1,15 +1,22 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { CalendarClock, MessageCircle, Scissors } from "lucide-react";
+import heroImg from "@/assets/hero-barber.jpg";
+import g1 from "@/assets/gallery-1.jpg";
+import g3 from "@/assets/gallery-3.jpg";
 
 const steps = [
-  { Icon: CalendarClock, t: "Escolha o horário", d: "Veja os horários disponíveis e escolha o que combina com sua rotina." },
-  { Icon: MessageCircle, t: "Confirme pelo WhatsApp", d: "Um clique. Resposta rápida. Sem burocracia." },
-  { Icon: Scissors, t: "Chegue e aproveite", d: "Relaxe na cadeira. Deixe o resultado com a gente." },
+  { Icon: CalendarClock, t: "Escolha o horário", d: "Veja os horários disponíveis e escolha o que combina com sua rotina.", img: g3 },
+  { Icon: MessageCircle, t: "Confirme pelo WhatsApp", d: "Um clique. Resposta rápida. Sem burocracia.", img: heroImg },
+  { Icon: Scissors, t: "Chegue e aproveite", d: "Relaxe na cadeira. Deixe o resultado com a gente.", img: g1 },
 ];
 
 export function HowItWorks() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+
   return (
-    <section className="py-24 sm:py-32">
+    <section ref={ref} className="relative py-24 sm:py-32">
       <div className="container-x">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">Como funciona</p>
@@ -18,27 +25,52 @@ export function HowItWorks() {
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3 relative">
-          <div aria-hidden className="absolute top-10 left-[16%] right-[16%] hidden md:block h-px bg-gradient-to-r from-transparent via-[color:var(--gold)]/40 to-transparent" />
-          {steps.map(({ Icon, t, d }, i) => (
-            <motion.div
-              key={t}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative text-center"
-            >
-              <div className="relative mx-auto grid h-20 w-20 place-items-center rounded-full bg-[color:var(--ink)] border border-[color:var(--gold)]/40 text-gold">
-                <Icon className="h-8 w-8" />
-                <span className="absolute -top-2 -right-2 grid h-7 w-7 place-items-center rounded-full bg-gold text-[color:var(--ink)] text-xs font-bold">
-                  {i + 1}
-                </span>
-              </div>
-              <h3 className="mt-6 text-2xl">{t}</h3>
-              <p className="mt-2 text-sm text-foreground/70 max-w-xs mx-auto">{d}</p>
-            </motion.div>
-          ))}
+        <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16">
+          {/* Sticky visual */}
+          <div className="hidden lg:block">
+            <div className="sticky top-24 aspect-[4/5] rounded-3xl overflow-hidden border border-white/5">
+              {steps.map((s, i) => {
+                const start = i / steps.length;
+                const end = (i + 1) / steps.length;
+                const opacity = useTransform(scrollYProgress, [start - 0.05, start + 0.05, end - 0.05, end + 0.05], [0, 1, 1, 0]);
+                const scale = useTransform(scrollYProgress, [start, end], [1.1, 1]);
+                return (
+                  <motion.img
+                    key={s.t}
+                    src={s.img}
+                    alt=""
+                    style={{ opacity, scale }}
+                    className="absolute inset-0 h-full w-full object-cover will-change-transform"
+                  />
+                );
+              })}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            </div>
+          </div>
+
+          {/* Steps */}
+          <div className="space-y-24 lg:py-24">
+            {steps.map(({ Icon, t, d }, i) => (
+              <motion.div
+                key={t}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="relative"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="grid h-16 w-16 place-items-center rounded-full bg-[color:var(--ink)] border border-[color:var(--gold)]/40 text-gold">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <span className="font-display text-6xl text-gradient-gold leading-none">0{i + 1}</span>
+                </div>
+                <h3 className="mt-6 text-3xl sm:text-4xl">{t}</h3>
+                <p className="mt-3 text-base text-foreground/70 max-w-md">{d}</p>
+                <div className="mt-6 h-px w-24 bg-gradient-to-r from-[color:var(--gold)]/60 to-transparent" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
