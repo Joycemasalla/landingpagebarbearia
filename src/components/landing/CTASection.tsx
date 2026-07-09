@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 import { waLink } from "@/lib/site";
-import heroImg from "@/assets/hero-barber.jpg";
+import heroImg from "@/assets/novo1.png";
 
 export function CTASection() {
   return (
     <section className="relative py-28 sm:py-36 overflow-hidden">
-      <img src={heroImg} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" />
+      <img src={heroImg} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover object-top opacity-25" />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/85 to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,var(--gold)_18%,transparent),transparent_60%)]" />
 

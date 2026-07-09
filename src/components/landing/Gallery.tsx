@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
-import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
-import hero from "@/assets/hero-barber.jpg";
-import about from "@/assets/about-romario.jpg";
+import g1 from "@/assets/novo3.png";
+import g2 from "@/assets/novo4.png";
+import g3 from "@/assets/novo5.png";
+import hero from "@/assets/novo1.png";
+import about from "@/assets/novo2.png";
+import g4 from "@/assets/SaveClip.App_688930333_1517974733458470_3502036613392616547_n.jpg";
 
 const images = [
   { src: g1, alt: "Corte moderno finalizado", cls: "row-span-2" },
@@ -55,7 +55,7 @@ export function Gallery() {
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.button>

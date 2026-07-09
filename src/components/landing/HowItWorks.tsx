@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { CalendarClock, MessageCircle, Scissors } from "lucide-react";
-import heroImg from "@/assets/hero-barber.jpg";
-import g1 from "@/assets/gallery-1.jpg";
-import g3 from "@/assets/gallery-3.jpg";
+import heroImg from "@/assets/novo1.png";
+import g1 from "@/assets/novo3.png";
+import g3 from "@/assets/novo5.png";
 
 const steps = [
   { Icon: CalendarClock, t: "Escolha o horário", d: "Veja os horários disponíveis e escolha o que combina com sua rotina.", img: g3 },
@@ -33,7 +33,7 @@ function StickyImage({ src, index, total, progress }: { src: string; index: numb
       src={src}
       alt=""
       style={{ opacity, scale }}
-      className="absolute inset-0 h-full w-full object-cover will-change-transform"
+      className="absolute inset-0 h-full w-full object-cover object-top will-change-transform"
     />
   );
 }

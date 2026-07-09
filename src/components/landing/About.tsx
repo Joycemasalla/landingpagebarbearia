@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import aboutImg from "@/assets/about-romario.jpg";
+import aboutImg from "@/assets/novo2.png";
 import { waLink } from "@/lib/site";
 
 export function About() {
@@ -21,7 +21,7 @@ export function About() {
               width={1200}
               height={1408}
               loading="lazy"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
             />
           </div>
           <div className="absolute -bottom-6 -right-4 hidden sm:block glass rounded-2xl px-5 py-4">

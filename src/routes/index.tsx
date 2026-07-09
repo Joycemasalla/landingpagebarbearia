@@ -12,6 +12,7 @@ import { FAQ } from "@/components/landing/FAQ";
 import { CTASection } from "@/components/landing/CTASection";
 import { Footer } from "@/components/landing/Footer";
 import { WhatsAppButton } from "@/components/landing/WhatsAppButton";
+import { BackToTop } from "@/components/landing/BackToTop";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -34,6 +35,7 @@ function Index() {
         <CTASection />
       </main>
       <Footer />
+      <BackToTop />
       <WhatsAppButton />
     </div>
   );

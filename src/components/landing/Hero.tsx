@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
-import heroImg from "@/assets/hero-barber.jpg";
+import heroImg from "@/assets/novo1.png";
 import { waLink } from "@/lib/site";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
@@ -20,7 +20,7 @@ export function Hero() {
         src={heroImg}
         alt="Barbeiro realizando corte moderno em cliente na Barbearia do Romário"
         style={{ y: imgY, scale: imgScale }}
-        className="absolute inset-0 h-full w-full object-cover will-change-transform"
+        className="absolute inset-0 h-full w-full object-cover object-top will-change-transform"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background" />
       <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/20 to-transparent" />
