@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { CalendarClock, MessageCircle, Scissors } from "lucide-react";
 import heroImg from "@/assets/hero-barber.jpg";
 import g1 from "@/assets/gallery-1.jpg";
@@ -10,6 +10,21 @@ const steps = [
   { Icon: MessageCircle, t: "Confirme pelo WhatsApp", d: "Um clique. Resposta rápida. Sem burocracia.", img: heroImg },
   { Icon: Scissors, t: "Chegue e aproveite", d: "Relaxe na cadeira. Deixe o resultado com a gente.", img: g1 },
 ];
+
+function StickyImage({ src, index, total, progress }: { src: string; index: number; total: number; progress: MotionValue<number> }) {
+  const start = index / total;
+  const end = (index + 1) / total;
+  const opacity = useTransform(progress, [start - 0.05, start + 0.05, end - 0.05, end + 0.05], [0, 1, 1, 0]);
+  const scale = useTransform(progress, [start, end], [1.1, 1]);
+  return (
+    <motion.img
+      src={src}
+      alt=""
+      style={{ opacity, scale }}
+      className="absolute inset-0 h-full w-full object-cover will-change-transform"
+    />
+  );
+}
 
 export function HowItWorks() {
   const ref = useRef<HTMLElement>(null);
