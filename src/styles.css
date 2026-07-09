@@ -158,3 +158,12 @@
   color: var(--gold-soft);
   transition: all 200ms ease;
 }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@utility animate-marquee {
+  animation: marquee linear infinite;
+}
