@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
-import heroImg from "@/assets/novo1.png";
+import heroVideo from "@/assets/hero-video.mp4";
 import { waLink } from "@/lib/site";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
@@ -9,21 +9,25 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.2]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} id="inicio" className="relative min-h-[100svh] w-full overflow-hidden">
-      <motion.img
-        src={heroImg}
-        alt="Barbeiro realizando corte moderno em cliente na Barbearia do Romário"
-        style={{ y: imgY, scale: imgScale }}
-        className="absolute inset-0 h-full w-full object-cover object-top will-change-transform"
+    <section ref={ref} id="inicio" className="relative min-h-[100svh] w-full overflow-hidden bg-black">
+      <video
+        src={heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/20 to-transparent" />
+      {/* Overlay premium solicitado - Escurecido para melhor leitura */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ background: 'linear-gradient(180deg, rgba(0,0,0,.70), rgba(0,0,0,.90))' }} 
+      />
 
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative container-x flex min-h-[100svh] flex-col justify-center pt-28 pb-16">
         <div className="max-w-2xl">

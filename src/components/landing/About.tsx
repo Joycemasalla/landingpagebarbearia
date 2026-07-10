@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import aboutImg from "@/assets/novo2.png";
+import aboutImg from "@/assets/about-photo.jpg";
 import { waLink } from "@/lib/site";
 
 export function About() {
