@@ -21,7 +21,7 @@ export function Hero() {
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-[75%_center] sm:object-center"
       />
       {/* Overlay premium solicitado - Escurecido para melhor leitura */}
       <div 
