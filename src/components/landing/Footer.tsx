@@ -8,8 +8,7 @@ export function Footer() {
       <div className="container-x py-16 grid gap-10 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--gold)]/50 font-display text-gold text-xl">R</span>
-            <span className="text-sm tracking-[0.25em] uppercase">{SITE.name}</span>
+            <img src="/logo.png" alt={SITE.name} className="h-20 w-auto object-contain" />
           </div>
           <p className="mt-4 text-sm text-foreground/60 max-w-xs">
             A experiência premium em corte e barba na cidade de Miraí, MG.
@@ -41,7 +40,9 @@ export function Footer() {
           <h4 className="text-xs uppercase tracking-[0.3em] text-gold">Onde estamos</h4>
           <p className="mt-4 inline-flex items-start gap-2 text-sm text-foreground/75">
             <MapPin className="h-4 w-4 mt-0.5 text-gold shrink-0" />
-            <span>{SITE.address}</span>
+            <a href={SITE.mapLink} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+              {SITE.address}
+            </a>
           </p>
           <h4 className="mt-6 text-xs uppercase tracking-[0.3em] text-gold">Horários</h4>
           <ul className="mt-3 space-y-2 text-sm text-foreground/75">

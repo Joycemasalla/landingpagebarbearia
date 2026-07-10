@@ -34,10 +34,8 @@ export function Navbar() {
     >
       <nav className="container-x flex h-16 items-center justify-between">
         <a href="#inicio" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-full border border-[color:var(--gold)]/50 font-display text-gold text-xl">
-            R
-          </span>
-          <span className="hidden sm:block text-sm tracking-[0.25em] uppercase text-foreground/90">
+          <img src="/logo.png" alt={SITE.name} className="h-16 w-auto object-contain" />
+          <span className="hidden sm:block text-sm tracking-[0.25em] uppercase text-foreground/90 ml-1">
             {SITE.name}
           </span>
         </a>
