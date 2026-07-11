@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import { waLink } from "@/lib/site";
+import { useBooking } from "@/lib/booking-context";
 
 const services = [
   {
@@ -24,6 +24,7 @@ const services = [
 ];
 
 export function Services() {
+  const { open } = useBooking();
   return (
     <section id="servicos" className="py-24 sm:py-32">
       <div className="container-x">
@@ -62,14 +63,13 @@ export function Services() {
                 <span className="text-4xl font-display text-gradient-gold">{s.price}</span>
                 <span className="text-xs text-foreground/50">a partir de</span>
               </div>
-              <a
-                href={waLink(`Olá! Quero agendar: ${s.title}`)}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={open}
                 className={`mt-8 ${s.featured ? "btn-gold hover:btn-gold-hover" : "btn-ghost-gold hover:bg-white/5"}`}
               >
                 <FaWhatsapp /> Agendar
-              </a>
+              </button>
             </motion.article>
           ))}
         </div>

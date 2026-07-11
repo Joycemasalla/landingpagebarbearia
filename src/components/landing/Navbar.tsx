@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import { SITE, waLink } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { useBooking } from "@/lib/booking-context";
 
 const links = [
   { label: "Início", href: "#inicio" },
@@ -15,6 +16,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { open: openBooking } = useBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -50,14 +52,13 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
-          href={waLink()}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={openBooking}
           className="hidden md:inline-flex btn-gold hover:btn-gold-hover text-sm"
         >
           <FaWhatsapp className="text-lg" /> Agendar
-        </a>
+        </button>
 
         <button
           onClick={() => setOpen((v) => !v)}
@@ -87,9 +88,13 @@ export function Navbar() {
               </li>
             ))}
             <li>
-              <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-gold hover:btn-gold-hover w-full">
-                <FaWhatsapp /> Agendar pelo WhatsApp
-              </a>
+              <button
+                type="button"
+                onClick={() => { setOpen(false); openBooking(); }}
+                className="btn-gold hover:btn-gold-hover w-full"
+              >
+                <FaWhatsapp /> Agendar horário
+              </button>
             </li>
           </ul>
         </div>

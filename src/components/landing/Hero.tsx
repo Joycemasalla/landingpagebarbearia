@@ -2,12 +2,13 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
 import heroVideo from "@/assets/hero-video.mp4";
-import { waLink } from "@/lib/site";
+import { useBooking } from "@/lib/booking-context";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const { open } = useBooking();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
@@ -65,8 +66,12 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
-            <MagneticButton href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-gold hover:btn-gold-hover">
-              <FaWhatsapp className="text-xl" /> Agendar pelo WhatsApp
+            <MagneticButton
+              href="#agendar"
+              onClick={(e) => { e.preventDefault(); open(); }}
+              className="btn-gold hover:btn-gold-hover"
+            >
+              <FaWhatsapp className="text-xl" /> Agendar horário
             </MagneticButton>
             <MagneticButton href="#servicos" strength={0.2} className="btn-ghost-gold hover:bg-white/5">
               Ver serviços
