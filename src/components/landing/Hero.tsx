@@ -9,6 +9,7 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const { open } = useBooking();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
