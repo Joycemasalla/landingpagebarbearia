@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SmoothScroll } from "../components/motion/SmoothScroll";
+import { BookingProvider } from "../lib/booking-context";
+import { BookingModal } from "../components/landing/BookingModal";
 
 function NotFoundComponent() {
   return (
