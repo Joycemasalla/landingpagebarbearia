@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
 import heroVideo from "@/assets/hero-video.mp4";
 import { useBooking } from "@/lib/booking-context";
-import { useBooking } from "@/lib/booking-context";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 
