@@ -52,14 +52,13 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
-          href={waLink()}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={openBooking}
           className="hidden md:inline-flex btn-gold hover:btn-gold-hover text-sm"
         >
           <FaWhatsapp className="text-lg" /> Agendar
-        </a>
+        </button>
 
         <button
           onClick={() => setOpen((v) => !v)}
