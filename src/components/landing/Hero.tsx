@@ -67,8 +67,12 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
-            <MagneticButton href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-gold hover:btn-gold-hover">
-              <FaWhatsapp className="text-xl" /> Agendar pelo WhatsApp
+            <MagneticButton
+              href="#agendar"
+              onClick={(e) => { e.preventDefault(); open(); }}
+              className="btn-gold hover:btn-gold-hover"
+            >
+              <FaWhatsapp className="text-xl" /> Agendar horário
             </MagneticButton>
             <MagneticButton href="#servicos" strength={0.2} className="btn-ghost-gold hover:bg-white/5">
               Ver serviços
