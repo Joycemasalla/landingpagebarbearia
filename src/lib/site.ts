@@ -1,3 +1,5 @@
+export const SETMORE_URL = "https://barbeariadoromario.setmore.com/";
+
 export const SITE = {
   name: "Barbearia do Romário",
   city: "Miraí, MG",
