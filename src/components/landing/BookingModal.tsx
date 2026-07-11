@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
 import {
@@ -14,17 +14,22 @@ export function BookingModal() {
   const { isOpen, close } = useBooking();
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
+  const loadedRef = useRef(false);
 
   // Reset load state each time modal opens; safety timeout to trigger fallback.
   useEffect(() => {
     if (!isOpen) return;
     setLoaded(false);
     setFailed(false);
+    loadedRef.current = false;
+    
     const t = window.setTimeout(() => {
-      setFailed((prev) => (loaded ? prev : true));
+      if (!loadedRef.current) {
+        setFailed(true);
+      }
     }, 8000);
+    
     return () => window.clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
@@ -69,7 +74,10 @@ export function BookingModal() {
               key={isOpen ? "open" : "closed"}
               title="Agendamento — Barbearia do Romário"
               src={SETMORE_URL}
-              onLoad={() => setLoaded(true)}
+              onLoad={() => {
+                setLoaded(true);
+                loadedRef.current = true;
+              }}
               onError={() => setFailed(true)}
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               className="h-full w-full border-0 bg-white"
