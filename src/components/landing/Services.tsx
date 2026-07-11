@@ -24,6 +24,7 @@ const services = [
 ];
 
 export function Services() {
+  const { open } = useBooking();
   return (
     <section id="servicos" className="py-24 sm:py-32">
       <div className="container-x">
