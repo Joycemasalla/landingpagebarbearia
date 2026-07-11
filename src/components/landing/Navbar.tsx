@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import { SITE, waLink } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { useBooking } from "@/lib/booking-context";
 
 const links = [
   { label: "Início", href: "#inicio" },
