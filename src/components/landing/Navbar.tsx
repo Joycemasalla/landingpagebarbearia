@@ -88,9 +88,13 @@ export function Navbar() {
               </li>
             ))}
             <li>
-              <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-gold hover:btn-gold-hover w-full">
-                <FaWhatsapp /> Agendar pelo WhatsApp
-              </a>
+              <button
+                type="button"
+                onClick={() => { setOpen(false); openBooking(); }}
+                className="btn-gold hover:btn-gold-hover w-full"
+              >
+                <FaWhatsapp /> Agendar horário
+              </button>
             </li>
           </ul>
         </div>
