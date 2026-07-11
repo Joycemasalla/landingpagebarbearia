@@ -135,8 +135,11 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <SmoothScroll />
-      <Outlet />
+      <BookingProvider>
+        <SmoothScroll />
+        <Outlet />
+        <BookingModal />
+      </BookingProvider>
     </QueryClientProvider>
   );
 }
