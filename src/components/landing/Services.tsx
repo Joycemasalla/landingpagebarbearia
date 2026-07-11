@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import { waLink } from "@/lib/site";
+import { useBooking } from "@/lib/booking-context";
 
 const services = [
   {
