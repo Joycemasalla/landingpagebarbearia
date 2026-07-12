@@ -72,7 +72,7 @@ export function Footer() {
       <div className="border-t border-white/5">
         <div className="container-x py-6 flex flex-wrap items-center justify-between gap-3 text-xs text-foreground/50">
           <p>© {new Date().getFullYear()} {SITE.name}. Todos os direitos reservados.</p>
-          <p>Feito com estilo em Miraí, MG.</p>
+          <p>Desenvolvido por <a href="#" className="font-medium text-gold hover:underline">Joyce Masalla</a></p>
         </div>
       </div>
     </footer>

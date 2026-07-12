@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SmoothScroll } from "../components/motion/SmoothScroll";
 import { BookingProvider } from "../lib/booking-context";
 import { BookingModal } from "../components/landing/BookingModal";
+import { Watermark } from "../components/Watermark";
 
 function NotFoundComponent() {
   return (
@@ -103,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressCountry: "BR",
           },
           openingHoursSpecification: [
-            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "20:00" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "20:00" },
             { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "18:00" },
           ],
           sameAs: ["https://www.instagram.com/barbeariadoromariomirai/"],
@@ -139,6 +140,7 @@ function RootComponent() {
         <SmoothScroll />
         <Outlet />
         <BookingModal />
+        <Watermark />
       </BookingProvider>
     </QueryClientProvider>
   );
