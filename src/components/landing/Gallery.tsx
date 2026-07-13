@@ -6,7 +6,7 @@ import g2 from "@/assets/novo4.png";
 import g3 from "@/assets/novo5.png";
 import hero from "@/assets/novo1.png";
 import about from "@/assets/novo2.png";
-import g4 from "@/assets/SaveClip.App_688930333_1517974733458470_3502036613392616547_n.jpg";
+import g4 from "@/assets/gallery-extra.jpg";
 
 const images = [
   { src: g1, alt: "Corte moderno finalizado", cls: "row-span-2" },

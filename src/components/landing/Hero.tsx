@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
 import heroVideo from "@/assets/hero-video.mp4";
+import heroPoster from "@/assets/hero-poster.jpg";
 import { useBooking } from "@/lib/booking-context";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
@@ -17,11 +18,13 @@ export function Hero() {
     <section ref={ref} id="inicio" className="relative min-h-[100svh] w-full overflow-hidden bg-black">
       <video
         src={heroVideo}
+        poster={heroPoster}
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
+        aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover object-[75%_center] sm:object-center"
       />
       {/* Overlay premium solicitado - Escurecido para melhor leitura */}

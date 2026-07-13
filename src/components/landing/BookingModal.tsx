@@ -12,25 +12,27 @@ import { SETMORE_URL, waLink } from "@/lib/site";
 
 export function BookingModal() {
   const { isOpen, close } = useBooking();
+  const [everOpened, setEverOpened] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const loadedRef = useRef(false);
+  const timeoutRef = useRef<number | undefined>(undefined);
 
-  // Reset load state each time modal opens; safety timeout to trigger fallback.
+  // Mount the iframe on first open and KEEP it mounted so the user's
+  // in-progress booking survives an accidental close.
   useEffect(() => {
     if (!isOpen) return;
+    if (!everOpened) setEverOpened(true);
+    if (loadedRef.current) return; // already loaded — no fresh timeout needed
     setLoaded(false);
     setFailed(false);
-    loadedRef.current = false;
-    
-    const t = window.setTimeout(() => {
-      if (!loadedRef.current) {
-        setFailed(true);
-      }
-    }, 8000);
-    
-    return () => window.clearTimeout(t);
-  }, [isOpen]);
+    timeoutRef.current = window.setTimeout(() => {
+      if (!loadedRef.current) setFailed(true);
+    }, 10_000);
+    return () => {
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    };
+  }, [isOpen, everOpened]);
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => (o ? null : close())}>
@@ -46,13 +48,13 @@ export function BookingModal() {
           {!loaded && !failed && (
             <div className="absolute inset-0 z-10 grid place-items-center bg-[color:var(--ink)]">
               <div className="flex flex-col items-center gap-4 text-foreground/70">
-                <Loader2 className="h-8 w-8 animate-spin text-gold" />
-                <p className="text-sm uppercase tracking-[0.25em]">Carregando agenda…</p>
+                <Loader2 className="h-8 w-8 animate-spin text-gold" aria-hidden="true" />
+                <p className="text-sm uppercase tracking-[0.25em]" role="status">Carregando agenda…</p>
               </div>
             </div>
           )}
 
-          {failed ? (
+          {failed && (
             <div className="absolute inset-0 z-20 grid place-items-center bg-[color:var(--ink)] px-6 text-center">
               <div className="max-w-sm">
                 <h3 className="text-2xl">Não foi possível carregar a agenda</h3>
@@ -65,21 +67,25 @@ export function BookingModal() {
                   rel="noopener noreferrer"
                   className="btn-gold hover:btn-gold-hover mt-6"
                 >
-                  <FaWhatsapp className="text-xl" /> Agendar pelo WhatsApp
+                  <FaWhatsapp className="text-xl" aria-hidden="true" /> Agendar pelo WhatsApp
                 </a>
               </div>
             </div>
-          ) : (
+          )}
+
+          {everOpened && !failed && (
             <iframe
-              key={isOpen ? "open" : "closed"}
               title="Agendamento — Barbearia do Romário"
               src={SETMORE_URL}
               onLoad={() => {
                 setLoaded(true);
                 loadedRef.current = true;
+                if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
               }}
               onError={() => setFailed(true)}
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              referrerPolicy="no-referrer-when-downgrade"
+              loading="lazy"
               className="h-full w-full border-0 bg-white"
             />
           )}
