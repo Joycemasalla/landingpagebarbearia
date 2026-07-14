@@ -65,8 +65,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-import { SITE_URL } from "../lib/site";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
