@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://landingpagebarbearia.lovable.app";
+const BASE_URL = SITE_URL;
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -16,6 +17,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           `    <lastmod>${today}</lastmod>`,
           `    <changefreq>weekly</changefreq>`,
           `    <priority>1.0</priority>`,
+          `  </url>`,
+          `  <url>`,
+          `    <loc>${BASE_URL}/privacidade</loc>`,
+          `    <lastmod>${today}</lastmod>`,
+          `    <changefreq>yearly</changefreq>`,
+          `    <priority>0.3</priority>`,
           `  </url>`,
           `</urlset>`,
         ].join("\n");

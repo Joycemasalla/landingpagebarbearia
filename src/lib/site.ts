@@ -1,5 +1,12 @@
 export const SETMORE_URL = "https://barbeariadoromario.setmore.com/";
 
+// Canonical origin do site. Configurável por env para preparar o domínio
+// próprio sem alterar código (defina VITE_SITE_URL em produção).
+export const SITE_URL: string =
+  (typeof import.meta !== "undefined" && (import.meta.env?.VITE_SITE_URL as string | undefined)) ||
+  "https://landingpagebarbearia.lovable.app";
+
+
 export const SITE = {
   name: "Barbearia do Romário",
   city: "Miraí, MG",

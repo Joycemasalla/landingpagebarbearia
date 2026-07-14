@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { initMonitoring } from "../lib/monitoring";
+import { SITE_URL } from "../lib/site";
 import { SmoothScroll } from "../components/motion/SmoothScroll";
 import { BookingProvider } from "../lib/booking-context";
 import { BookingModal } from "../components/landing/BookingModal";
@@ -63,6 +65,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -78,20 +83,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Barbearia do Romário" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:url", content: "https://landingpagebarbearia.lovable.app/" },
-      { property: "og:image", content: "https://landingpagebarbearia.lovable.app/og-image.jpg" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Barbearia do Romário — Cortes & Barba em Miraí, MG" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Barbearia do Romário — Cortes e Barba em Miraí, MG" },
       { name: "twitter:description", content: "Cortes modernos, barba na navalha e atendimento premium em Miraí, MG." },
-      { name: "twitter:image", content: "https://landingpagebarbearia.lovable.app/og-image.jpg" },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/logo.png", type: "image/png" },
-      { rel: "canonical", href: "https://landingpagebarbearia.lovable.app/" },
+      { rel: "canonical", href: `${SITE_URL}/` },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "dns-prefetch", href: "https://barbeariadoromario.setmore.com" },
@@ -104,9 +109,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "HairSalon",
           name: "Barbearia do Romário",
-          image: "https://landingpagebarbearia.lovable.app/og-image.jpg",
-          "@id": "https://landingpagebarbearia.lovable.app/",
-          url: "https://landingpagebarbearia.lovable.app/",
+          image: OG_IMAGE,
+          "@id": `${SITE_URL}/`,
+          url: `${SITE_URL}/`,
           priceRange: "$$",
           address: {
             "@type": "PostalAddress",
@@ -146,6 +151,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    void initMonitoring();
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <BookingProvider>
