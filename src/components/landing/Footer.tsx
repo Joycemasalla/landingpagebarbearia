@@ -1,5 +1,6 @@
 import { FaWhatsapp, FaInstagram, FaPhone } from "react-icons/fa";
 import { MapPin, Clock } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { SITE, waLink } from "@/lib/site";
 
 export function Footer() {
